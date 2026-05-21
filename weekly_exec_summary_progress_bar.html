@@ -1,0 +1,214 @@
+
+<h2 class="sr-only">Weekly A/B test executive summary — Progress Bar tests, week of May 13–19, 2026</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.page{max-width:860px;padding:2rem 1.5rem 3rem;font-family:var(--font-sans);color:var(--color-text-primary)}
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:1.25rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.75rem}
+.doc-title{font-size:20px;font-weight:500;line-height:1.3}
+.doc-meta{font-size:12px;color:var(--color-text-secondary);margin-top:4px}
+.doc-date{font-size:12px;color:var(--color-text-tertiary);text-align:right;line-height:1.8}
+.tldr{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:2rem}
+.tldr-label{font-size:11px;font-weight:500;letter-spacing:.07em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:8px}
+.tldr-items{display:flex;flex-direction:column;gap:6px}
+.tldr-item{font-size:13.5px;color:var(--color-text-primary);line-height:1.5;padding-left:14px;position:relative}
+.tldr-item::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%}
+.tldr-item.win::before{background:var(--color-background-success);outline:1.5px solid var(--color-text-success)}
+.tldr-item.watch::before{background:var(--color-background-warning);outline:1.5px solid var(--color-text-warning)}
+.test-block{margin-bottom:2.25rem}
+.test-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.test-name{font-size:16px;font-weight:500}
+.test-meta{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.badge-live{background:var(--color-background-success);color:var(--color-text-success)}
+.badge-watch{background:var(--color-background-warning);color:var(--color-text-warning)}
+.scorecard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1rem}
+.sc-cell{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.sc-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px;letter-spacing:.02em}
+.sc-control{font-size:12px;color:var(--color-text-tertiary);margin-bottom:2px}
+.sc-value{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1.2}
+.sc-delta{font-size:12px;font-weight:500;margin-top:3px}
+.sc-conf{font-size:11px;color:var(--color-text-tertiary);margin-top:1px}
+.pos{color:var(--color-text-success)}
+.neg{color:var(--color-text-danger)}
+.flat{color:var(--color-text-secondary)}
+.star{color:var(--color-text-warning)}
+.insight{border-left:2px solid var(--color-border-tertiary);border-radius:0;padding:.65rem 1rem;margin-bottom:.5rem;font-size:13.5px;line-height:1.6;color:var(--color-text-secondary)}
+.insight strong{color:var(--color-text-primary);font-weight:500}
+.test-config{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.config-cell{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.65rem 1rem;font-size:12.5px;color:var(--color-text-secondary);line-height:1.8}
+.config-cell strong{color:var(--color-text-primary);font-weight:500;display:block;font-size:12px;margin-bottom:2px}
+.section-divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:2rem 0}
+.summary-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:.5rem}
+.summary-table th{font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);padding:6px 10px;text-align:left}
+.summary-table td{padding:9px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+.summary-table tr:last-child td{border-bottom:none}
+.t-name{font-weight:500}
+.t-muted{color:var(--color-text-secondary);font-size:12px}
+.rec-block{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-top:1.5rem}
+.rec-label{font-size:11px;font-weight:500;letter-spacing:.07em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:10px}
+.rec-item{font-size:13.5px;color:var(--color-text-primary);line-height:1.6;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;gap:10px}
+.rec-item:last-child{border-bottom:none}
+.rec-num{font-size:12px;font-weight:500;color:var(--color-text-tertiary);min-width:18px;padding-top:1px}
+.footnote{font-size:11px;color:var(--color-text-tertiary);margin-top:1.5rem;line-height:1.7}
+</style>
+
+<div class="page">
+
+<div class="doc-header">
+  <div>
+    <div class="doc-title">A/B testing — weekly executive summary</div>
+    <div class="doc-meta">Progress bar offer tests · Ridge eCommerce</div>
+  </div>
+  <div class="doc-date">
+    Week of May 13–19, 2026<br>
+    Prepared by Will Moran<br>
+    Source: Intelligems
+  </div>
+</div>
+
+<div class="tldr">
+  <div class="tldr-label">TL;DR</div>
+  <div class="tldr-items">
+    <div class="tldr-item win">The TECH progress bar is producing a statistically significant lift — AOV +9.6% and revenue/visitor +13.8% at 99% confidence. Recommend keeping live and preparing to scale.</div>
+    <div class="tldr-item watch">The RINGS progress bar is trending positively across all metrics but hasn't yet reached significance. Needs 1–2 more weeks of data before a conclusive read.</div>
+    <div class="tldr-item win">Combined estimated monthly revenue impact if both tests are rolled out: ~$57K/mo.</div>
+  </div>
+</div>
+
+<div class="test-block">
+  <div class="test-header">
+    <div>
+      <div class="test-name">Progress bar — TECH offer</div>
+      <div class="test-meta">Started Apr 28 · 70/30 split · Trigger: TECH product added to cart · GWP: free Ridge Wallet at $175</div>
+    </div>
+    <span class="badge badge-live">Strong signal</span>
+  </div>
+
+  <div class="scorecard">
+    <div class="sc-cell">
+      <div class="sc-label">Conversion rate</div>
+      <div class="sc-control">Control: 20.1%</div>
+      <div class="sc-value">20.8%</div>
+      <div class="sc-delta pos">+3.9%</div>
+      <div class="sc-conf">84% confidence</div>
+    </div>
+    <div class="sc-cell">
+      <div class="sc-label">Revenue / visitor</div>
+      <div class="sc-control">Control: $27.66</div>
+      <div class="sc-value">$31.48</div>
+      <div class="sc-delta pos">+13.8% <span class="star">✦</span></div>
+      <div class="sc-conf">99% confidence</div>
+    </div>
+    <div class="sc-cell">
+      <div class="sc-label">Avg order value</div>
+      <div class="sc-control">Control: $137.94</div>
+      <div class="sc-value">$151.12</div>
+      <div class="sc-delta pos">+9.6% <span class="star">✦</span></div>
+      <div class="sc-conf">99% confidence</div>
+    </div>
+    <div class="sc-cell">
+      <div class="sc-label">Profit / visitor</div>
+      <div class="sc-control">Control: $23.06</div>
+      <div class="sc-value">$25.52</div>
+      <div class="sc-delta pos">+10.7% <span class="star">✦</span></div>
+      <div class="sc-conf">96% confidence</div>
+    </div>
+  </div>
+
+  <div class="insight"><strong>What's happening:</strong> The $175 GWP threshold sits ~$37 above the natural TECH AOV (~$138), creating a meaningful but achievable stretch goal. Buyers in the progress bar group are spending more per order, converting at a slightly higher rate, and adding to cart at a +6.6% higher rate — an upstream signal that the offer is influencing behavior before checkout, not just at the margin.</div>
+  <div class="insight"><strong>Bottom line:</strong> Three of four primary metrics are at ≥96% confidence with strong magnitude. This is the clearest win in the progress bar program to date. The free Ridge Wallet appears to be a more motivating gift at a better-calibrated threshold than prior tests.</div>
+</div>
+
+<hr class="section-divider">
+
+<div class="test-block">
+  <div class="test-header">
+    <div>
+      <div class="test-name">Progress bar — RINGS offer</div>
+      <div class="test-meta">Started Apr 14 · 70/30 split · Trigger: RINGS product added to cart · GWP: free Everyday Keychain at $225</div>
+    </div>
+    <span class="badge badge-watch">Trending positive</span>
+  </div>
+
+  <div class="scorecard">
+    <div class="sc-cell">
+      <div class="sc-label">Conversion rate</div>
+      <div class="sc-control">Control: 25.6%</div>
+      <div class="sc-value">26.4%</div>
+      <div class="sc-delta pos">+3.2%</div>
+      <div class="sc-conf">77% confidence</div>
+    </div>
+    <div class="sc-cell">
+      <div class="sc-label">Revenue / visitor</div>
+      <div class="sc-control">Control: $43.73</div>
+      <div class="sc-value">$46.20</div>
+      <div class="sc-delta pos">+5.6%</div>
+      <div class="sc-conf">80% confidence</div>
+    </div>
+    <div class="sc-cell">
+      <div class="sc-label">Avg order value</div>
+      <div class="sc-control">Control: $171.09</div>
+      <div class="sc-value">$175.13</div>
+      <div class="sc-delta pos">+2.4%</div>
+      <div class="sc-conf">69% confidence</div>
+    </div>
+    <div class="sc-cell">
+      <div class="sc-label">Profit / visitor</div>
+      <div class="sc-control">Control: $39.83</div>
+      <div class="sc-value">$42.07</div>
+      <div class="sc-delta pos">+5.6%</div>
+      <div class="sc-conf">79% confidence</div>
+    </div>
+  </div>
+
+  <div class="insight"><strong>What's happening:</strong> All four metrics are positive, but the test is underpowered at this stage. The RINGS segment has lower traffic volume than TECH, extending the timeline to significance. There's also a structural question: the $225 threshold requires ~$54 of spend above the RINGS natural AOV (~$171) — a steeper climb than the TECH test's ~$37 gap, which may be limiting how many buyers actually close the distance.</div>
+  <div class="insight"><strong>Bottom line:</strong> Nothing negative in the data — the direction is right. Recommend keeping live and reassessing in 7–10 days. If confidence doesn't build, the threshold may need to drop (e.g. to $200) to match the stretch mechanics that worked in TECH.</div>
+</div>
+
+<hr class="section-divider">
+
+<div>
+  <div style="font-size:14px;font-weight:500;margin-bottom:.75rem">Test scorecard — week of May 13–19</div>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th style="width:28%">Test</th>
+        <th>CVR</th>
+        <th>Rev/visitor</th>
+        <th>AOV</th>
+        <th>Profit/visitor</th>
+        <th style="text-align:right">Est. monthly lift</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="t-name">TECH progress bar</span><br><span class="t-muted">$175 GWP · free wallet</span></td>
+        <td><span class="pos">+3.9%</span><br><span class="t-muted">84% conf</span></td>
+        <td><span class="pos">+13.8% ✦</span><br><span class="t-muted">99% conf</span></td>
+        <td><span class="pos">+9.6% ✦</span><br><span class="t-muted">99% conf</span></td>
+        <td><span class="pos">+10.7% ✦</span><br><span class="t-muted">96% conf</span></td>
+        <td style="text-align:right;font-weight:500">~$43K</td>
+      </tr>
+      <tr>
+        <td><span class="t-name">RINGS progress bar</span><br><span class="t-muted">$225 GWP · free keychain</span></td>
+        <td><span class="pos">+3.2%</span><br><span class="t-muted">77% conf</span></td>
+        <td><span class="pos">+5.6%</span><br><span class="t-muted">80% conf</span></td>
+        <td><span class="pos">+2.4%</span><br><span class="t-muted">69% conf</span></td>
+        <td><span class="pos">+5.6%</span><br><span class="t-muted">79% conf</span></td>
+        <td style="text-align:right;font-weight:500">~$14K</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:6px">✦ statistically meaningful signal (≥90% confidence). Est. monthly lift figures from Intelligems impact model.</div>
+</div>
+
+<div class="rec-block">
+  <div class="rec-label">Recommended actions</div>
+  <div class="rec-item"><span class="rec-num">1</span><span>Keep the TECH progress bar live. Begin planning a rollout path — the signal is strong enough to act on. Consider whether the free Ridge Wallet GWP can be applied more broadly across other segments.</span></div>
+  <div class="rec-item"><span class="rec-num">2</span><span>Keep the RINGS progress bar live for another 7–10 days. If confidence plateaus below 85% across metrics, reduce the GWP threshold from $225 to $200 and re-evaluate. The direction is right; the bar may just be set slightly too high for the RINGS buyer.</span></div>
+  <div class="rec-item"><span class="rec-num">3</span><span>Explore pairing the progress bar mechanic with a PDP-level GWP callout on high-AOV product pages — particularly for products that naturally clear the threshold, where a cart progress bar provides no stretch incentive.</span></div>
+</div>
+
+<div class="footnote">Data source: Intelligems · Z-score filter: 9999 (all orders included) · Report window: May 13–19, 2026 · Prepared by Will Moran, Ridge eCommerce</div>
+
+</div>
